@@ -1,0 +1,8 @@
+{
+	ID = 1;
+	name = "Duct Tape";
+	use = 10000;
+	property = [adhesive,rope];
+	rigid = 0.5;
+	texture = "tape.bmp";
+}
