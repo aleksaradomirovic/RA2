@@ -13,18 +13,24 @@ public class Input implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_UP) {
-			Game.up = true;
-//			System.out.println("u");
-		} else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-			Game.down = true;
-//			System.out.println("d");
-		} else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			Game.left = true;
-//			System.out.println("l");
-		} else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			Game.right = true;
-//			System.out.println("r");
+		if(e.getKeyCode() == KeyEvent.VK_G) {
+			Game.local.inventory.visible = !Game.local.inventory.visible;
+		}
+		
+		if(!Game.local.inventory.visible) {
+			if(e.getKeyCode() == KeyEvent.VK_UP) {
+				Game.up = true;
+				//			System.out.println("u");
+			} else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+				Game.down = true;
+				//			System.out.println("d");
+			} else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+				Game.left = true;
+				//			System.out.println("l");
+			} else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				Game.right = true;
+				//			System.out.println("r");
+			}
 		}
 	}
 

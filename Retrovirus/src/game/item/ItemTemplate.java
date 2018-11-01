@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class ItemTemplate {
-	int id = -1;
+	int id = -1, productid = -1;
 	float mass = 0, rigid = 0;
 	int use = 1;
 	String name = null, imgfile = null;
@@ -46,6 +46,10 @@ public class ItemTemplate {
 				s = s.replace(" ", "");
 				index = s.lastIndexOf('=')+1;
 				use = Integer.parseInt(s.substring(index, s.length()-1));
+			} else if(productid == -1 && s.contains("product")) {
+				s = s.replace(" ", "");
+				index = s.lastIndexOf('=')+1;
+				productid = Integer.parseInt(s.substring(index, s.length()-1));
 			}
 		}
 		System.out.println("id = "+id);
@@ -54,5 +58,6 @@ public class ItemTemplate {
 		System.out.println("rigid = "+rigid);
 		System.out.println("mass = "+mass);
 		System.out.println("uses = "+use);
+		System.out.println("product = "+productid);
 	}
 }

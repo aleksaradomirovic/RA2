@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Window extends JPanel implements ActionListener {
+	public static Font defaultFont = new Font("Arial", Font.PLAIN, 10);
 	JFrame frame = new JFrame();
 	Timer drawUpdate = new Timer(1000/60, this);
 	Game game = new Game();

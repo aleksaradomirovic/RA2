@@ -40,6 +40,8 @@ public class Game implements ActionListener {
 		World.py = local.y-400;
 		if(game instanceof SinglePlayerWorld) {
 			game.characters[0] = local;
+			local.inventory.items.add(new Item(1,0,0));
+			local.inventory.items.add(new Item(1,0,0));
 			game.items.add(new Item(1,0,0));
 		}
 		
