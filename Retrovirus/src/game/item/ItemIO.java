@@ -9,9 +9,9 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class ItemIO {
-	File[] itemAssets, imageAssets;
-	File itemFolder, imageFolder;
-	ArrayList<ItemTemplate> assets = new ArrayList<ItemTemplate>();
+	static File[] itemAssets, imageAssets;
+	static File itemFolder, imageFolder;
+	public static ArrayList<ItemTemplate> assets = new ArrayList<ItemTemplate>();
 	
 	public ItemIO() {
 		try {
@@ -99,5 +99,21 @@ public class ItemIO {
 				e1.printStackTrace();
 			}
 		}
+	}
+	
+	public static File getImageFile(String dir) {
+		for(File e : imageAssets) {
+			if(e.getName().equals(dir)) return e;
+		}
+		System.err.println("dir "+dir+" does not exist");
+		return null;
+	}
+	
+	public static ItemTemplate getItem(int id) {
+		for(ItemTemplate i : assets) {
+			if(i.id == id) return i;
+		}
+		System.err.println("Item ID "+id+" does not exist");
+		return null;
 	}
 }

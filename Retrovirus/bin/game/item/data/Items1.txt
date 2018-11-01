@@ -5,4 +5,5 @@
 	property = [adhesive,rope];
 	rigid = 0.5;
 	texture = "tape.bmp";
+	mass = 0.0002;
 }

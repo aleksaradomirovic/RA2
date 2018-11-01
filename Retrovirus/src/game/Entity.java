@@ -6,6 +6,9 @@ import java.awt.Graphics;
 
 public class Entity {
 	int x, y;
+	
+	Interface inventory = new Interface();
+	
 	public Entity(Dimension location) {
 		x = location.width;
 		y = location.height;
@@ -16,6 +19,10 @@ public class Entity {
 		
 		g.setColor(Color.YELLOW);
 		g.drawRect(xs-20, ys-40, 40, 80);
+	}
+	
+	void update() {
+		
 	}
 	
 	int xs, ys;
