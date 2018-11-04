@@ -1,6 +1,7 @@
 package game.item;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import game.World;
@@ -12,6 +13,8 @@ public class Item {
 	public int id;
 	int use;
 	BufferedImage img;
+	public Rectangle hitBox = new Rectangle();
+	int xs, ys;
 	
 	public Item(int id, int x, int y) {
 		this.id = id;
@@ -27,7 +30,6 @@ public class Item {
 	}
 	
 	public void draw(Graphics g) {
-		int xs, ys;
 		
 		xs = x-World.px;
 		ys = y-World.py;
@@ -37,7 +39,8 @@ public class Item {
 	}
 	
 	public void update() {
-		
+		hitBox.setBounds(xs, ys, img.getWidth(), img.getHeight());
+//		System.out.println(hitBox.x+" "+hitBox.y+" "+hitBox.width+" "+hitBox.height);
 	}
 	
 	public float mass() {

@@ -57,6 +57,8 @@ public class Game implements ActionListener {
 		World.px = local.x-640;
 		World.py = local.y-400;
 		
+		Window.peripherals.update();
+		
 		if(game instanceof SinglePlayerWorld) {
 			game.update();
 		}
@@ -73,7 +75,18 @@ public class Game implements ActionListener {
 			p.draw(g);
 		}
 		
+		drawExternalGUI(g);
+		
 		local.inventory.draw(g);
+	}
+	
+	static void drawExternalGUI(Graphics g) {
+		if(game.inRangeOfItem() && !local.inventory.visible) {
+//			System.out.println("itemrange");
+			g.setFont(Window.defaultFont);
+			g.setColor(Color.BLACK);
+			g.drawString("[F] Pick Up", Window.peripherals.mouseX+12, Window.peripherals.mouseY+15);
+		}
 	}
 
 	@Override

@@ -12,16 +12,17 @@ import javax.swing.Timer;
 
 public class Window extends JPanel implements ActionListener {
 	public static Font defaultFont = new Font("Arial", Font.PLAIN, 10);
-	JFrame frame = new JFrame();
+	static JFrame frame = new JFrame();
 	Timer drawUpdate = new Timer(1000/60, this);
 	Game game = new Game();
-	Input peripherals = new Input();
+	static Input peripherals = new Input();
 	void setup(String mode) {
 		frame.add(this);
 		frame.setPreferredSize(new Dimension(1280,800));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Retrovirus");
 		frame.addKeyListener(peripherals);
+		frame.addMouseListener(peripherals);
 		frame.setResizable(false);
 		frame.pack();
 		

@@ -9,7 +9,7 @@ public class ItemTemplate {
 	int id = -1, productid = -1;
 	float mass = 0, rigid = 0;
 	int use = 1;
-	String name = null, imgfile = null;
+	public String name = null, imgfile = null;
 	BufferedImage img;
 	public ItemTemplate(String[] parsedItemData) {
 		for(int i = 0; i < parsedItemData.length; i++) {

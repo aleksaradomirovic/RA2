@@ -23,4 +23,13 @@ public class World {
 	}
 	
 	public static int px, py;
+	
+	boolean inRangeOfItem() {
+		for(Item e : items) {
+			if(e.hitBox.contains(Window.peripherals.mouseX, Window.peripherals.mouseY)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
