@@ -31,6 +31,16 @@ public class Input implements KeyListener, MouseListener {
 			Game.local.inventory.visible = !Game.local.inventory.visible;
 		}
 		
+		if(Game.local.inventory.visible) {
+			if(e.getKeyCode() == KeyEvent.VK_UP) {
+				Game.local.inventory.upselect();
+				//	System.out.println("u");
+			} else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+				Game.local.inventory.downSelect();
+				//	System.out.println("d");
+			}
+		}
+		
 		if(!Game.local.inventory.visible) {
 			if(e.getKeyCode() == KeyEvent.VK_UP) {
 				Game.up = true;

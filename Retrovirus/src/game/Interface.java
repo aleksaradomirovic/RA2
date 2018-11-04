@@ -15,11 +15,11 @@ public class Interface {
 	
 	void draw(Graphics g) {
 		boolean[] marked = new boolean[items.size()];
-		itemCounts = new int[ItemIO.assets.size()];
+		itemCounts = new int[ItemIO.assets.size()+1];
 		for(int i = 0; i < items.size(); i++) {
 			int k = 0;
 			if(!marked[i]) {
-				for(int j = 0; j < items.size(); j++) {
+				for(int j = 1; j < items.size(); j++) {
 					if(items.get(j).id == items.get(i).id) {
 						k++;
 						marked[j] = true;
@@ -56,7 +56,7 @@ public class Interface {
 	
 	void upselect() {
 		int o = select;
-		int i = 0;
+		int i = o-1;
 		
 		while(i >= 0 && itemCounts[i] < 1) i--;
 		
@@ -66,7 +66,7 @@ public class Interface {
 	
 	void downSelect() {
 		int o = select;
-		int i = 0;
+		int i = o+1;
 		
 		while(i < itemCounts.length && itemCounts[i] < 1) i++;
 		
