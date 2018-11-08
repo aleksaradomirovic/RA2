@@ -10,7 +10,7 @@ public class ItemTemplate {
 	float mass = 0, rigid = 0;
 	int use = 1;
 	public String name = null, imgfile = null;
-	BufferedImage img;
+	public BufferedImage img;
 	public ItemTemplate(String[] parsedItemData) {
 		for(int i = 0; i < parsedItemData.length; i++) {
 			parsedItemData[i] = parsedItemData[i].replace("\t", "");
@@ -59,5 +59,15 @@ public class ItemTemplate {
 		System.out.println("mass = "+mass);
 		System.out.println("uses = "+use);
 		System.out.println("product = "+productid);
+	}
+	
+	public int scaleImage() {
+		if(img.getWidth() > img.getHeight()) {
+			return img.getHeight()/img.getWidth();
+		} else if(img.getHeight() > img.getWidth()) {
+			return img.getWidth()/img.getHeight();
+		} else {
+			return 1;
+		}
 	}
 }

@@ -6,12 +6,14 @@ import java.util.ArrayList;
 
 import game.item.Item;
 import game.item.ItemIO;
+import game.item.ItemTemplate;
 
 public class Interface {
 	ArrayList<Item> items = new ArrayList<Item>();
 	int[] itemCounts;
 	boolean visible = false;
-	int select = 0;
+	int select = 1;
+	boolean contextOpen = false;
 	
 	void draw(Graphics g) {
 		boolean[] marked = new boolean[items.size()];
@@ -42,8 +44,25 @@ public class Interface {
 			int s = 0;
 			for(int i = 0; i < itemCounts.length; i++) {
 				if(itemCounts[i] > 0) {
-					if(select == i-s) g.setColor(Color.RED);
-					else g.setColor(Color.BLACK);
+					if(select == i-s+1) {
+						if(contextOpen) {
+							g.setColor(Color.GRAY);
+							g.fillRect(800, 140+((i-s)*11), 200, 200);
+							g.setColor(Color.BLACK);
+							g.drawRect(800, 140+((i-s)*11), 200, 200);
+							ItemTemplate tempAsset = ItemIO.getItem(i);
+							if(tempAsset.img.getWidth() > tempAsset.img.getHeight()) {
+								g.drawImage(tempAsset.img, 801, 141+((i-s)*11), 100, 100*tempAsset.scaleImage(), null);
+							} else if(tempAsset.img.getHeight() > tempAsset.img.getWidth()) {
+								g.drawImage(tempAsset.img, 801, 141+((i-s)*11), 100*tempAsset.scaleImage(), 100, null);
+							} else {
+								g.drawImage(tempAsset.img, 801, 141+((i-s)*11), 100, 100, null);
+							}
+						}
+						
+						//must be last
+						g.setColor(Color.RED);
+					} else g.setColor(Color.BLACK);
 					
 					g.drawString(ItemIO.getItem(i).name+" ("+itemCounts[i]+")", 681, 150+((i-s)*11));
 				} else {
@@ -62,6 +81,7 @@ public class Interface {
 		
 		if(i < 0) select = o;
 		else select = i;
+		System.out.println(i);
 	}
 	
 	void downSelect() {
@@ -70,7 +90,8 @@ public class Interface {
 		
 		while(i < itemCounts.length && itemCounts[i] < 1) i++;
 		
-		if(i < 0) select = o;
+		if(i >= itemCounts.length) select = o;
 		else select = i;
+		System.out.println(i);
 	}
 }

@@ -38,6 +38,14 @@ public class Input implements KeyListener, MouseListener {
 			} else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
 				Game.local.inventory.downSelect();
 				//	System.out.println("d");
+			} else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				Game.local.inventory.contextOpen = true;
+			} else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				if(Game.local.inventory.contextOpen) {
+					Game.local.inventory.contextOpen = false;
+				} else {
+					Game.local.inventory.visible = false;
+				}
 			}
 		}
 		

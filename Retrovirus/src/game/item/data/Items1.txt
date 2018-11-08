@@ -21,8 +21,8 @@
 	ID = 3;
 	name = "Dirty Bandage";
 	use = 0;
-	property = [septic];
+	property = [cloth,dirty];
 	rigid = 0.1;
-	texture = "bandage.bmp";
+	texture = "dirtybandage.bmp";
 	mass = 0.5;
 }

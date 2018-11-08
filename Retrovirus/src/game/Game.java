@@ -45,6 +45,7 @@ public class Game implements ActionListener {
 			local.inventory.items.add(new Item(2,0,0));
 //			local.inventory.items.add(new Item(3,0,0));
 			game.items.add(new Item(1,0,0));
+			game.items.add(new Item(3,100,100));
 		}
 		
 		localUpdate.start();
