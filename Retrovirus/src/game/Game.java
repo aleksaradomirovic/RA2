@@ -10,6 +10,7 @@ import javax.swing.Timer;
 
 import game.item.Item;
 import game.item.ItemIO;
+import terrain.Region;
 
 public class Game implements ActionListener {
 	public static void main(String[] args) {
@@ -68,7 +69,10 @@ public class Game implements ActionListener {
 //		System.out.println("update");
 	}
 	
+	public static boolean loadSequence = false;
+	
 	static void draw(Graphics g) {
+		if(!loadSequence) {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, 1280, 800);
 		for(Entity p : game.characters) {
@@ -81,6 +85,16 @@ public class Game implements ActionListener {
 		drawExternalGUI(g);
 		
 		local.inventory.draw(g);
+		} else {
+			//TODO region load screen
+			g.setColor(Color.BLACK);
+			g.fillRect(0, 0, 1280, 800);
+			g.setColor(Color.RED);
+			g.setFont(Window.defaultFont);
+			g.drawRect(500, 200, 280, 20);
+			g.fillRect(500, 200, (int) (280*(Region.loading/Region.REGION_TOTAL_TILES)), 20);
+			g.drawString(Region.loading+" / "+Region.REGION_TOTAL_TILES+" tiles loaded", 500, 300);
+		}
 	}
 	
 	static void drawExternalGUI(Graphics g) {

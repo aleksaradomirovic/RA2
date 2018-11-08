@@ -51,13 +51,17 @@ public class Interface {
 							g.setColor(Color.BLACK);
 							g.drawRect(800, 140+((i-s)*11), 200, 200);
 							ItemTemplate tempAsset = ItemIO.getItem(i);
-							if(tempAsset.img.getWidth() > tempAsset.img.getHeight()) {
-								g.drawImage(tempAsset.img, 801, 141+((i-s)*11), 100, 100*tempAsset.scaleImage(), null);
-							} else if(tempAsset.img.getHeight() > tempAsset.img.getWidth()) {
-								g.drawImage(tempAsset.img, 801, 141+((i-s)*11), 100*tempAsset.scaleImage(), 100, null);
-							} else {
-								g.drawImage(tempAsset.img, 801, 141+((i-s)*11), 100, 100, null);
-							}
+							g.setColor(Color.WHITE);
+							g.drawString(tempAsset.name,801, 150+((i-s)*11));
+							g.setColor(Color.BLACK);
+							
+//							if(tempAsset.img.getWidth() > tempAsset.img.getHeight()) {
+//								g.drawImage(tempAsset.img, 801, 141+((i-s)*11), 100, 100*tempAsset.scaleImage(), null);
+//							} else if(tempAsset.img.getHeight() > tempAsset.img.getWidth()) {
+//								g.drawImage(tempAsset.img, 801, 141+((i-s)*11), 100*tempAsset.scaleImage(), 100, null);
+//							} else {
+//								g.drawImage(tempAsset.img, 801, 141+((i-s)*11), 100, 100, null);
+//							}
 						}
 						
 						//must be last

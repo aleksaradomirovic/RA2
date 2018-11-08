@@ -26,14 +26,15 @@ public class Window extends JPanel implements ActionListener {
 		frame.setResizable(false);
 		frame.pack();
 		
+		frame.setVisible(true);
+		
 		if(mode == "debug") {
 			game.start(new SinglePlayerWorld());
 			drawUpdate.start();
+			Game.game.loadTerrain();
 		} else {
 			
 		}
-		
-		frame.setVisible(true);
 	}
 	
 	@Override

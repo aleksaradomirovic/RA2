@@ -4,9 +4,11 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 
 import game.item.Item;
+import terrain.Region;
 
 //server class, separate from game so that Multiplayer can be instituted
 public class World {
+	Region t;
 	Player[] characters;
 	ArrayList<Item> items = new ArrayList<Item>();
 	void update() {
@@ -31,5 +33,9 @@ public class World {
 			}
 		}
 		return false;
+	}
+	
+	void loadTerrain() {
+		t = new Region(0,0);
 	}
 }
