@@ -11,6 +11,8 @@ public class ItemTemplate {
 	int use = 1;
 	public String name = null, imgfile = null;
 	public BufferedImage img;
+	String desc = "";
+	String[] parsedDesc;
 	public ItemTemplate(String[] parsedItemData) {
 		for(int i = 0; i < parsedItemData.length; i++) {
 			parsedItemData[i] = parsedItemData[i].replace("\t", "");
@@ -50,6 +52,11 @@ public class ItemTemplate {
 				s = s.replace(" ", "");
 				index = s.lastIndexOf('=')+1;
 				productid = Integer.parseInt(s.substring(index, s.length()-1));
+			} else if(desc == "" && s.contains("desc")) {
+				s = s.substring(index);
+				int open = s.indexOf("\"")+1, close = s.lastIndexOf("\"");
+				desc = s.substring(open, close);
+				parseDesc();
 			}
 		}
 		System.out.println("id = "+id);
@@ -68,6 +75,19 @@ public class ItemTemplate {
 			return img.getWidth()/img.getHeight();
 		} else {
 			return 1;
+		}
+	}
+	
+	private void parseDesc() {
+		int l = (int)desc.length()/16;
+		parsedDesc = new String[l];
+		
+		int cNum = 0;
+		for(int index = 0; index < l; index++) {
+			for(int i = 0; i < 16; i++) {
+				parsedDesc[index]+=desc.charAt(cNum);
+				cNum++;
+			}
 		}
 	}
 }
