@@ -6,7 +6,6 @@
 	rigid = 0.5;
 	texture = "tape.bmp";
 	mass = 0.0002;
-	desc = "Adhesive track used for industrial purposes."
 }
 {
 	ID = 2;
