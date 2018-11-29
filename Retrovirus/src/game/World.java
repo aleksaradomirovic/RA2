@@ -11,31 +11,32 @@ public class World {
 	Region t;
 	Player[] characters;
 	public ArrayList<Item> items = new ArrayList<Item>();
+
 	void update() {
-		for(Player p : characters) {
+		for (Player p : characters) {
 			p.update();
 		}
-		for(Item p : items) {
+		for (Item p : items) {
 			p.update();
 		}
 	}
-	
+
 	Dimension spawn() {
-		return new Dimension(0,0);
+		return new Dimension(0, 0);
 	}
-	
+
 	public static int px, py;
-	
-	boolean inRangeOfItem() {
-		for(Item e : items) {
-			if(e.hitBox.contains(Window.peripherals.mouseX, Window.peripherals.mouseY)) {
-				return true;
+
+	Item inRangeOfItem() {
+		for (Item e : items) {
+			if (e.hitBox.contains(Window.peripherals.mouseX, Window.peripherals.mouseY)) {
+				return e;
 			}
 		}
-		return false;
+		return null;
 	}
-	
+
 	void loadTerrain() {
-		t = new Region(0,0);
+		t = new Region(0, 0);
 	}
 }

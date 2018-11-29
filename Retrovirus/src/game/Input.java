@@ -6,12 +6,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import game.item.Item;
-import game.item.ItemIO;
-
 public class Input implements KeyListener, MouseListener {
 
 	public int mouseX, mouseY;
+	Interface inv;
 
 	public void update() {
 		mouseY = MouseInfo.getPointerInfo().getLocation().y - Window.frame.getY() - 26;
@@ -32,41 +30,9 @@ public class Input implements KeyListener, MouseListener {
 				Game.local.inventory.contextOpen = false;
 		}
 
-		if (Game.local.inventory.visible) {
-			if(!Game.local.inventory.contextOpen) {
-				if (e.getKeyCode() == KeyEvent.VK_UP) {
-					Game.local.inventory.upselect();
-					// System.out.println("u");
-				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-					Game.local.inventory.downSelect();
-					// System.out.println("d");
-				} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					Game.local.inventory.contextOpen = true;
-				}
-			} else {
-				if (e.getKeyCode() == KeyEvent.VK_UP) {
-					Game.local.inventory.contextSelect--;
-					// System.out.println("u");
-				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-					Game.local.inventory.contextSelect++;
-					// System.out.println("d");
-				} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					int s = Game.local.inventory.select;
-					Item actionItem = Game.local.inventory.getOfID(s);
-					actionItem.performAction(ItemIO.getItem(s).options[Game.local.inventory.contextSelect]);
-				}
-			}
-			
-			if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-				if (Game.local.inventory.contextOpen) {
-					Game.local.inventory.contextOpen = false;
-				} else {
-					Game.local.inventory.visible = false;
-				}
-			}
-		}
+		if (!Game.local.inventory.visible)
 
-		if (!Game.local.inventory.visible) {
+		{
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
 				Game.up = true;
 				// System.out.println("u");
@@ -80,21 +46,15 @@ public class Input implements KeyListener, MouseListener {
 				Game.right = true;
 				// System.out.println("r");
 			} else if (e.getKeyCode() == KeyEvent.VK_F) {
-				boolean[] remove = new boolean[Game.game.items.size()];
-				for (int i = 0; i < Game.game.items.size(); i++) {
-					Item p = Game.game.items.get(i);
-					if (p.hitBox.contains(mouseX, mouseY)) {
-						Game.local.inventory.items.add(p);
-						// Game.game.items.remove(p);
-						remove[i] = true;
-					}
-				}
-				for (int i = 0; i < remove.length; i++) {
-					if (remove[i]) {
-						Game.game.items.remove(i);
-					}
-				}
-
+				inv.items.add(Game.game.inRangeOfItem());
+				Game.game.items.remove(Game.game.inRangeOfItem());
+			}
+		} else {
+			inv = Game.local.inventory;
+			if (e.getKeyCode() == KeyEvent.VK_DOWN && inv.select < inv.items.size() - 1) {
+				inv.select++;
+			} else if (e.getKeyCode() == KeyEvent.VK_UP && inv.select > 0) {
+				inv.select--;
 			}
 		}
 	}
