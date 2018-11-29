@@ -10,7 +10,7 @@ import terrain.Region;
 public class World {
 	Region t;
 	Player[] characters;
-	ArrayList<Item> items = new ArrayList<Item>();
+	public ArrayList<Item> items = new ArrayList<Item>();
 	void update() {
 		for(Player p : characters) {
 			p.update();

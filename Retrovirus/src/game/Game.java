@@ -27,8 +27,8 @@ public class Game implements ActionListener {
 	static boolean up, down, left, right;
 	
 	public static ItemIO itemAssetLoader = new ItemIO();
-	static World game;
-	static Player local;
+	public static World game;
+	public static Player local;
 	Timer localUpdate = new Timer(1000/60, this);
 	
 	void start(World i) {
@@ -76,7 +76,11 @@ public class Game implements ActionListener {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, 1280, 800);
 		for(Entity p : game.characters) {
-			p.draw(g);
+			try {
+				p.draw(g);
+			} catch(NullPointerException e) {
+				System.err.println("2-tick player load, ignore exception");
+			}
 		}
 		for(Item p : game.items) {
 			p.draw(g);
@@ -84,7 +88,12 @@ public class Game implements ActionListener {
 		
 		drawExternalGUI(g);
 		
-		local.inventory.draw(g);
+		try {
+			local.inventory.draw(g);
+		} catch(NullPointerException e) {
+			System.err.println("2-tick player load, ignore exception");
+		}
+		
 		} else {
 			//TODO region load screen
 			g.setColor(Color.BLACK);

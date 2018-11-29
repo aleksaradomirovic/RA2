@@ -9,11 +9,12 @@ import game.item.ItemIO;
 import game.item.ItemTemplate;
 
 public class Interface {
-	ArrayList<Item> items = new ArrayList<Item>();
+	public ArrayList<Item> items = new ArrayList<Item>();
 	int[] itemCounts;
 	boolean visible = false;
 	int select = 1;
 	boolean contextOpen = false;
+	int contextSelect = 0;
 
 	void draw(Graphics g) {
 		boolean[] marked = new boolean[items.size()];
@@ -46,17 +47,25 @@ public class Interface {
 				if (itemCounts[i] > 0) {
 					if (select == i - s + 1) {
 						if (contextOpen) {
+							ItemTemplate tempAsset = ItemIO.getItem(i);
+							
+							if(contextSelect < 0) contextSelect = 0;
+							if(contextSelect >= tempAsset.options.length) contextSelect = tempAsset.options.length-1;
+							
 							g.setColor(Color.GRAY);
 							g.fillRect(800, 140 + ((i - s) * 11), 200, 200);
 							g.setColor(Color.BLACK);
 							g.drawRect(800, 140 + ((i - s) * 11), 200, 200);
-							ItemTemplate tempAsset = ItemIO.getItem(i);
+							
 							g.setColor(Color.WHITE);
 							g.drawString(tempAsset.name, 801, 150 + ((i - s) * 11));
 							g.setColor(Color.BLACK);
 							int n = ((i - s) * 11);
 							for (int j = 0; j < tempAsset.options.length; j++) {
-								g.drawRect(800, 328 + n - (j * 12), 100, 12);
+								g.drawRect(800, 340 + (j-tempAsset.options.length * 12), 100, 12);
+								if(j == contextSelect) g.setColor(Color.RED);
+								g.drawString(tempAsset.options[j], 802, 350 + (j-tempAsset.options.length * 12));
+								g.setColor(Color.BLACK);
 							}
 
 							// if(tempAsset.img.getWidth() > tempAsset.img.getHeight()) {
@@ -110,5 +119,11 @@ public class Interface {
 		else
 			select = i;
 		System.out.println(i);
+	}
+	public Item getOfID(int id) {
+		for(int i = 0; i < items.size(); i++) {
+			if(items.get(i).id == id) return items.get(i);
+		}
+		return null;
 	}
 }

@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import game.item.Item;
+import game.item.ItemIO;
 
 public class Input implements KeyListener, MouseListener {
 
@@ -32,15 +33,31 @@ public class Input implements KeyListener, MouseListener {
 		}
 
 		if (Game.local.inventory.visible) {
-			if (e.getKeyCode() == KeyEvent.VK_UP) {
-				Game.local.inventory.upselect();
-				// System.out.println("u");
-			} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-				Game.local.inventory.downSelect();
-				// System.out.println("d");
-			} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-				Game.local.inventory.contextOpen = true;
-			} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			if(!Game.local.inventory.contextOpen) {
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					Game.local.inventory.upselect();
+					// System.out.println("u");
+				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					Game.local.inventory.downSelect();
+					// System.out.println("d");
+				} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					Game.local.inventory.contextOpen = true;
+				}
+			} else {
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					Game.local.inventory.contextSelect--;
+					// System.out.println("u");
+				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					Game.local.inventory.contextSelect++;
+					// System.out.println("d");
+				} else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					int s = Game.local.inventory.select;
+					Item actionItem = Game.local.inventory.getOfID(s);
+					actionItem.performAction(ItemIO.getItem(s).options[Game.local.inventory.contextSelect]);
+				}
+			}
+			
+			if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 				if (Game.local.inventory.contextOpen) {
 					Game.local.inventory.contextOpen = false;
 				} else {

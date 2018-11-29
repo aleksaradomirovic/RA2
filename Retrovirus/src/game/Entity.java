@@ -5,9 +5,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 
 public class Entity {
-	int x, y;
+	public int x, y;
 	
-	Interface inventory = new Interface();
+	public Interface inventory = new Interface();
 	
 	public Entity(Dimension location) {
 		x = location.width;

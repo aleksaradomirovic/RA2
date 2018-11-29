@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import game.Game;
 import game.World;
 
 public class Item {
@@ -45,5 +46,18 @@ public class Item {
 	
 	public float mass() {
 		return mass*use;
+	}
+	
+	public void performAction(String action) {
+		if(action == "Drop") {
+			x = Game.local.x;
+			y = Game.local.y;
+			
+			Game.game.items.add(this);
+			Game.local.inventory.items.remove(this);
+			System.out.println("Performed \"Drop\" action");
+		} else {
+			System.out.println("Performed null action");
+		}
 	}
 }
