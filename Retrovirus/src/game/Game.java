@@ -2,6 +2,7 @@ package game;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,6 +24,8 @@ public class Game implements ActionListener {
 			new Window().setup(null);
 		}
 	}
+	
+	static Rectangle screen = new Rectangle(World.px, World.py, 1280, 800);
 
 	static boolean up, down, left, right;
 
@@ -66,6 +69,8 @@ public class Game implements ActionListener {
 		World.py = local.y - 400;
 
 		Window.peripherals.update();
+		
+		screen.setBounds(World.px, World.py, 1280, 800);
 
 		if (game instanceof SinglePlayerWorld) {
 			game.update();
@@ -79,6 +84,9 @@ public class Game implements ActionListener {
 		if (!loadSequence) {
 			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, 1280, 800);
+			
+			game.draw(g);
+			
 			for (Entity p : game.characters) {
 				try {
 					p.draw(g);
@@ -91,12 +99,8 @@ public class Game implements ActionListener {
 			}
 
 			drawExternalGUI(g);
-
-			try {
-				local.inventory.draw(g);
-			} catch (NullPointerException e) {
-				System.err.println("2-tick player load, ignore exception");
-			}
+			
+			local.inventory.draw(g);
 
 		} else {
 			// TODO region load screen
@@ -115,7 +119,7 @@ public class Game implements ActionListener {
 			// System.out.println("itemrange");
 			g.setFont(Window.defaultFont);
 			g.setColor(Color.BLACK);
-			g.drawString("[F] Pick Up", Window.peripherals.mouseX + 12, Window.peripherals.mouseY + 15);
+			g.drawString("[F] Pick Up "+game.inRangeOfItem().name, Window.peripherals.mouseX + 12, Window.peripherals.mouseY + 15);
 		}
 	}
 

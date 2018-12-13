@@ -28,6 +28,9 @@ public class Input implements KeyListener, MouseListener {
 			Game.local.inventory.visible = !Game.local.inventory.visible;
 			if (!Game.local.inventory.visible)
 				Game.local.inventory.contextOpen = false;
+		} else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			if(Game.local.inventory.contextOpen) Game.local.inventory.contextOpen = false;
+			else Game.local.inventory.visible = false;
 		}
 
 		if (!Game.local.inventory.visible)
@@ -55,6 +58,8 @@ public class Input implements KeyListener, MouseListener {
 				inv.select++;
 			} else if (e.getKeyCode() == KeyEvent.VK_UP && inv.select > 0) {
 				inv.select--;
+			} else if(e.getKeyCode() == KeyEvent.VK_F) {
+				//TODO search
 			}
 		}
 	}
