@@ -24,6 +24,7 @@ public class Interface {
 					g.fillRect(700, 100 + (i * 12), 100, 12);
 					g.setColor(Color.BLACK);
 				}
+				System.out.println(items.get(i).name);
 				g.drawString(items.get(i).name, 701, 110 + (i * 12));
 			}
 		}

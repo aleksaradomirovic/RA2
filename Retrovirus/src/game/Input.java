@@ -48,9 +48,6 @@ public class Input implements KeyListener, MouseListener {
 			} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				Game.right = true;
 				// System.out.println("r");
-			} else if (e.getKeyCode() == KeyEvent.VK_F) {
-				inv.items.add(Game.game.inRangeOfItem());
-				Game.game.items.remove(Game.game.inRangeOfItem());
 			}
 		} else {
 			inv = Game.local.inventory;
@@ -81,6 +78,8 @@ public class Input implements KeyListener, MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		System.out.println(arg0.getX() + ", " + arg0.getY() + "; " + mouseX + ", " + mouseY);
+		
+		
 	}
 
 	@Override
