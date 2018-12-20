@@ -18,6 +18,8 @@ public class Tile {
 	
 	int xs, ys;
 	
+	
+	
 	void draw(Graphics g) {
 		xs = x-World.px;
 		ys = y-World.py;

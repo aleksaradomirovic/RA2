@@ -62,13 +62,13 @@ public class Game implements ActionListener {
 		if(focusObject == null) foselect = 0;
 		
 		if (up)
-			local.y -= 5;
+			local.y -= 2;
 		if (down)
-			local.y += 5;
+			local.y += 2;
 		if (left)
-			local.x -= 10;
+			local.x -= 4;
 		if (right)
-			local.x += 10;
+			local.x += 4;
 
 		World.px = local.x - 640;
 		World.py = local.y - 400;

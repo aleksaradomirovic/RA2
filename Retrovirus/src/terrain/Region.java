@@ -29,6 +29,8 @@ public class Region {
 		for(int i = 0; i < REGION_WIDTH; i++) {
 			for(int j = 0; j < REGION_WIDTH; j++) {
 				terrain[i][j] = new Tile(x + (i*Tile.WIDTH), y + (j*Tile.HEIGHT));
+				
+				
 				loading++;
 //				System.out.println("Tile "+loading+" / "+REGION_TOTAL_TILES);
 			}

@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import game.item.Item;
 import terrain.Region;
 
-//server class, separate from game so that Multiplayer can be instituted
+//server class, separate from game so that multiplayer can be instituted
 public class World {
-	public static final int WORLD_SIZE = 100;
+	public static final int WORLD_SIZE = 1000;
 	
 	Player[] characters;
 	public ArrayList<Item> items = new ArrayList<Item>();
