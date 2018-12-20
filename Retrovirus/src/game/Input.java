@@ -24,16 +24,19 @@ public class Input implements KeyListener, MouseListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_G) {
+		if (e.getKeyCode() == KeyEvent.VK_G && Game.focusObject == null) {
 			Game.local.inventory.visible = !Game.local.inventory.visible;
 			if (!Game.local.inventory.visible)
 				Game.local.inventory.contextOpen = false;
 		} else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 			if(Game.local.inventory.contextOpen) Game.local.inventory.contextOpen = false;
-			else Game.local.inventory.visible = false;
+			else {
+				Game.local.inventory.visible = false;
+				Game.focusObject = null;
+			}
 		}
 
-		if (!Game.local.inventory.visible)
+		if (!Game.local.inventory.visible && Game.focusObject == null)
 
 		{
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -49,7 +52,7 @@ public class Input implements KeyListener, MouseListener {
 				Game.right = true;
 				// System.out.println("r");
 			}
-		} else {
+		} else if(Game.local.inventory.visible) {
 			inv = Game.local.inventory;
 			if (e.getKeyCode() == KeyEvent.VK_DOWN && inv.select < inv.items.size() - 1) {
 				inv.select++;
@@ -57,6 +60,14 @@ public class Input implements KeyListener, MouseListener {
 				inv.select--;
 			} else if(e.getKeyCode() == KeyEvent.VK_F) {
 				//TODO search
+			}
+		} else if(Game.focusObject != null) {
+			if (e.getKeyCode() == KeyEvent.VK_DOWN && Game.foselect < Game.focusObject.foOptions.length-1) {
+				Game.foselect++;
+			} else if (e.getKeyCode() == KeyEvent.VK_UP && Game.foselect > 0) {
+				Game.foselect--;
+			} else if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				Game.focusObject.runInteract(Game.foselect);
 			}
 		}
 	}
@@ -77,9 +88,13 @@ public class Input implements KeyListener, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println(arg0.getX() + ", " + arg0.getY() + "; " + mouseX + ", " + mouseY);
+		System.out.println(arg0.getX() + ", " + arg0.getY() + "; " + (mouseX+1) + ", " + (mouseY+2));
 		
+		GObject to = Game.game.checkForInteract(mouseX+1, mouseY+2);
 		
+		if(Game.focusObject == null || to == null) {
+			Game.focusObject = to;
+		}
 	}
 
 	@Override

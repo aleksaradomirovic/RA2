@@ -15,8 +15,8 @@ public class Item extends GObject {
 	public int id;
 	int use;
 	BufferedImage img;
-	public Rectangle hitBox = new Rectangle();
-	int xs, ys;
+//	public Rectangle hitBox = new Rectangle();
+//	int xs, ys;
 	
 	public Item(int id, int x, int y) {
 		this.id = id;
@@ -29,6 +29,9 @@ public class Item extends GObject {
 		use = t.use;
 		this.x = x;
 		this.y = y;
+		
+		foOptions = new String[] {"Pick Up"};
+		hitBox = new Rectangle();
 	}
 	
 	public void draw(Graphics g) {
@@ -49,6 +52,13 @@ public class Item extends GObject {
 		return mass*use;
 	}
 	
+	public boolean interacts(int x, int y) {
+		if(hitBox.contains(x,y)) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void performAction(String action) {
 		if(action == "Drop") {
 			x = Game.local.x;
@@ -59,6 +69,15 @@ public class Item extends GObject {
 			System.out.println("Performed \"Drop\" action");
 		} else {
 			System.out.println("Performed null action");
+		}
+	}
+	
+	@Override
+	public void runInteract(int select) {
+		if(select == 0) {
+			Game.local.inventory.items.add(this);
+			Game.game.items.remove(this);
+			Game.focusObject = null;
 		}
 	}
 }

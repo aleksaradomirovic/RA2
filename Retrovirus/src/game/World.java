@@ -26,8 +26,16 @@ public class World {
 		
 	}
 	
-	void checkForInteract() {
-		for(Item )
+	Item checkForInteract(int x, int y) {
+		for(Item p : items) {
+			if(p.interacts(x, y)) { 
+				System.out.println("interact");
+				return p;
+			}
+		}
+		System.out.println("no interact");
+		return null;
+		
 	}
 
 	Dimension spawn() {

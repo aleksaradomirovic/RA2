@@ -25,7 +25,7 @@ public class Game implements ActionListener {
 		}
 	}
 	
-	static Rectangle screen = new Rectangle(World.px, World.py, 1280, 800);
+	public static Rectangle screen = new Rectangle(World.px, World.py, 1280, 800);
 
 	static boolean up, down, left, right;
 
@@ -34,8 +34,8 @@ public class Game implements ActionListener {
 	public static Player local;
 	Timer localUpdate = new Timer(1000 / 60, this);
 	
-	GObject focusObject;
-	boolean FOcontext = false;
+	public static GObject focusObject;
+	static int foselect = 0;
 
 	void start(World i) {
 		game = i;
@@ -48,8 +48,8 @@ public class Game implements ActionListener {
 		if (game instanceof SinglePlayerWorld) {
 			game.characters[0] = local;
 			local.inventory.items.add(new Item(1, 0, 0));
-			local.inventory.items.add(new Item(1, 0, 0));
-			local.inventory.items.add(new Item(2, 0, 0));
+//			local.inventory.items.add(new Item(1, 0, 0));
+//			local.inventory.items.add(new Item(2, 0, 0));
 			// local.inventory.items.add(new Item(3,0,0));
 			game.items.add(new Item(1, 0, 0));
 			game.items.add(new Item(3, 100, 100));
@@ -59,6 +59,8 @@ public class Game implements ActionListener {
 	}
 
 	private void update() {
+		if(focusObject == null) foselect = 0;
+		
 		if (up)
 			local.y -= 5;
 		if (down)
@@ -118,6 +120,23 @@ public class Game implements ActionListener {
 	}
 
 	static void drawExternalGUI(Graphics g) {
+		if(focusObject != null) {
+			g.setColor(Color.GRAY);
+			g.fillRect(focusObject.xs, focusObject.ys, 100, 14*focusObject.foOptions.length);
+			g.setColor(Color.BLACK);
+			g.drawRect(focusObject.xs, focusObject.ys, 100, 14*focusObject.foOptions.length);
+			
+			for(int i = 0; i < focusObject.foOptions.length; i++) {
+				if(i == foselect) {
+					g.setColor(Color.RED);
+					g.fillRect(focusObject.xs+1, focusObject.ys+1+(14*i), 99, 13);
+				}
+				
+				g.setFont(Window.defaultFont);
+				g.setColor(Color.BLACK);
+				g.drawString(focusObject.foOptions[i], focusObject.xs+1, focusObject.ys+11+(14*i));
+			}
+		}
 	}
 
 	@Override
