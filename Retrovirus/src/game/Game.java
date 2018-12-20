@@ -33,6 +33,9 @@ public class Game implements ActionListener {
 	public static World game;
 	public static Player local;
 	Timer localUpdate = new Timer(1000 / 60, this);
+	
+	GObject focusObject;
+	boolean FOcontext = false;
 
 	void start(World i) {
 		game = i;
@@ -115,12 +118,6 @@ public class Game implements ActionListener {
 	}
 
 	static void drawExternalGUI(Graphics g) {
-		if (game.inRangeOfItem() != null && !local.inventory.visible) {
-			// System.out.println("itemrange");
-			g.setFont(Window.defaultFont);
-			g.setColor(Color.BLACK);
-			g.drawString("[F] Pick Up "+game.inRangeOfItem().name, Window.peripherals.mouseX + 12, Window.peripherals.mouseY + 15);
-		}
 	}
 
 	@Override

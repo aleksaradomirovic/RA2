@@ -4,10 +4,11 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import game.GObject;
 import game.Game;
 import game.World;
 
-public class Item {
+public class Item extends GObject {
 	int x, y;
 	float mass, rigid;
 	public String name;

@@ -25,21 +25,16 @@ public class World {
 		}
 		
 	}
+	
+	void checkForInteract() {
+		for(Item )
+	}
 
 	Dimension spawn() {
 		return new Dimension(0, 0);
 	}
 
 	public static int px, py;
-
-	Item inRangeOfItem() {
-		for (Item e : items) {
-			if (e.hitBox.contains(Window.peripherals.mouseX, Window.peripherals.mouseY)) {
-				return e;
-			}
-		}
-		return null;
-	}
 	
 	void loadTerrain() {
 		for(int i = 0; i < WORLD_SIZE; i++) {
